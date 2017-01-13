@@ -28,59 +28,7 @@ public class Lista {
 			head = nuevo;
 		}		tam++;
 	}
-
-	public void insrtarPorReferencia(int referencia, int dato){
-		Nodo nuevo = new Nodo();
-		nuevo.setDato(dato);
-		if (!esVacia()) {
-			if (buscar(referencia)) {
-				Nodo aux = head;
-				while (aux.getDato() != referencia) {
-					aux = aux.getSiguiente();
-				}
-				Nodo siguiente = aux.getSiguiente();
-				aux.setSiguiente(nuevo);
-				nuevo.setSiguiente(siguiente);
-				tam++;
-			}
-		}
-	}
-
-	public void insrtarPorPosicion(int posicion, int dato){
-
-		if(posicion>=0 && posicion<=tam){
-			Nodo nuevo = new Nodo();
-			nuevo.setDato(dato);
-			if(posicion == 0){
-				nuevo.setSiguiente(head);
-				head = nuevo;
-			}
-			else{
-
-				if(posicion == tam){
-					Nodo aux = head;
-					while(aux.getSiguiente() != null){
-						aux = aux.getSiguiente();
-					}
-
-					aux.setSiguiente(nuevo);              
-				}
-				else{
-
-					Nodo aux = head;
-					for (int i = 0; i < (posicion-1); i++) {
-						aux = aux.getSiguiente();
-					}
-					Nodo siguiente = aux.getSiguiente();
-					aux.setSiguiente(nuevo);
-					nuevo.setSiguiente(siguiente);
-				}
-			}
-			tam++;
-		}
-	}
-
-	
+///AGREGARA AL FINAL 
 
 	public void agregarAlFinal(int dato){
 		Nodo nuevo = new Nodo();
@@ -97,7 +45,7 @@ public class Lista {
 		tam++;
 	}
 	
-
+///BUSCAR
 	public boolean buscar(int referencia){
 		Nodo aux = head;
 		boolean encontrado = false;
@@ -112,7 +60,7 @@ public class Lista {
 		}
 		return encontrado;
 	}
-
+//OBTIENE LA POSISCION
 	public int getPosicion(int referencia) {
 		if (buscar(referencia)) {
 			Nodo aux = head;
@@ -127,7 +75,7 @@ public class Lista {
 			return referencia;
 		}
 	}
-
+///OBTENER EL DATO
 	public int getDato(int posicion){
 		if(posicion>=0 && posicion<tam){
 			if (posicion == 0) {
@@ -144,12 +92,12 @@ public class Lista {
 		}
 	}
 
-
+///ELIMINAR LA LISTA
 	public void eliminar(){
 		head = null;
 		tam = 0;
 	}
-
+///LISTAR
 	public void listar(){
 
 		if (!esVacia()) {
