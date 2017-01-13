@@ -1,313 +1,230 @@
 package listasEnlazadas;
 
 public class Lista {
-    
-    private Nodo inicio;
-   
-    private int tamanio;
-    
-    public void Lista(){
-        inicio = null;
-        tamanio = 0;
-    }
-   
-    public boolean esVacia(){
-        return inicio == null;
-    }
 
-    public int getTamanio(){
-        return tamanio;
-    }
-  
-    public void agregarAlFinal(int valor){
-        
-        Nodo nuevo = new Nodo();
-        
-        nuevo.setValor(valor);
-        
-        if (esVacia()) {
-           
-            inicio = nuevo;
-       
-        } else{
-            
-            Nodo aux = inicio;
-           
-            while(aux.getSiguiente() != null){
-                aux = aux.getSiguiente();
-            }
-           
-            aux.setSiguiente(nuevo);
-        }
-       
-        tamanio++;
-    }
-      
-    public void agregarAlInicio(int valor){
-        
-        Nodo nuevo = new Nodo();
-        
-        nuevo.setValor(valor);
-        
-        if (esVacia()) {
-            
-            inicio = nuevo;
-       
-        } else{
-            
-            nuevo.setSiguiente(inicio);
-            
-            inicio = nuevo;
-        }
-       
-        tamanio++;
-    }
-   
-    public void insertarPorReferencia(int referencia, int valor){
-        
-        Nodo nuevo = new Nodo();
-        
-        nuevo.setValor(valor);
-        
-        if (!esVacia()) {
-           
-            if (buscar(referencia)) {
-               
-                Nodo aux = inicio;
-                
-                while (aux.getValor() != referencia) {
-                    aux = aux.getSiguiente();
-                }
-                
-                Nodo siguiente = aux.getSiguiente();
-              
-                aux.setSiguiente(nuevo);
-                
-                nuevo.setSiguiente(siguiente);
-                
-               
-                tamanio++;
-            }
-        }
-    }
-   
-    public void insrtarPorPosicion(int posicion, int valor){
-        
-        if(posicion>=0 && posicion<=tamanio){
-            Nodo nuevo = new Nodo();
-            nuevo.setValor(valor);
-            
-            if(posicion == 0){
-               
-                nuevo.setSiguiente(inicio);
-                inicio = nuevo;
-            }
-            else{
-                
-                if(posicion == tamanio){
-                    Nodo aux = inicio;
-                    
-                    while(aux.getSiguiente() != null){
-                        aux = aux.getSiguiente();
-                    }
-                    
-                    aux.setSiguiente(nuevo);              
-                }
-                else{
-                    
-                    Nodo aux = inicio;
-                    
-                    for (int i = 0; i < (posicion-1); i++) {
-                        aux = aux.getSiguiente();
-                    }
-                 
-                    Nodo siguiente = aux.getSiguiente();
-                    
-                    aux.setSiguiente(nuevo);
-                    
-                    nuevo.setSiguiente(siguiente);
-                }
-            }
-            
-            tamanio++;
-        }
-    }
-  
-    public int getValor(int posicion) throws Exception{
-       
-        if(posicion>=0 && posicion<tamanio){
-            
-            if (posicion == 0) {
-                
-                return inicio.getValor();
-            }else{
-                
-                Nodo aux = inicio;
-                
-                for (int i = 0; i < posicion; i++) {
-                    aux = aux.getSiguiente();
-                }
-                
-                return aux.getValor();
-            }
-        
-        } else {
-            throw new Exception("Posicion inexistente en la lista.");
-        }
-    }
-   
-    public boolean buscar(int referencia){
-        
-        Nodo aux = inicio;
-       
-        boolean encontrado = false;
-      
-        while(aux != null && encontrado != true){
-            
-            if (referencia == aux.getValor()){
-               
-                encontrado = true;
-            }
-            else{
-               
-                aux = aux.getSiguiente();
-            }
-        }
-        
-        return encontrado;
-    }
-   
-    public int getPosicion(int referencia) throws Exception{
-        
-        if (buscar(referencia)) {
-            
-            Nodo aux = inicio;
-            
-            int cont = 0;
-            
-            while(referencia != aux.getValor()){
-                
-                cont ++;
-               
-                aux = aux.getSiguiente();
-            }
-           
-            return cont;
-        
-        } else {
-            throw new Exception("Valor inexistente en la lista.");
-        }
-    }
-   
-    public void editarPorReferencia(int referencia, int valor){
-       
-        if (buscar(referencia)) {
-            
-            Nodo aux = inicio;
-            
-            while(aux.getValor() != referencia){
-                aux = aux.getSiguiente();
-            }
-            
-            aux.setValor(valor);
-        }
-    }
-   
-    public void editarPorPosicion(int posicion , int valor){
-        
-        
-        if(posicion>=0 && posicion<tamanio){
-            
-            if(posicion == 0){
-               
-                inicio.setValor(valor);
-            }
-            else{
-                
-                Nodo aux = inicio;
-                
-                for (int i = 0; i < posicion; i++) {
-                    aux = aux.getSiguiente();
-                }
-                
-                aux.setValor(valor);
-            }
-        }
-    }
-   
-    public void removerPorReferencia(int referencia){
-        
-        if (buscar(referencia)) {
-           
-            if (inicio.getValor() == referencia) {
-                
-                inicio = inicio.getSiguiente();
-            } else{
-                
-                Nodo aux = inicio;
-                
-                while(aux.getSiguiente().getValor() != referencia){
-                    aux = aux.getSiguiente();
-                }
-               
-                Nodo siguiente = aux.getSiguiente().getSiguiente();
-                
-                aux.setSiguiente(siguiente);  
-            }
-            
-            tamanio--;
-        }
-    }
-    
-    public void removerPorPosicion(int posicion){
-        
-        if(posicion>=0 && posicion<tamanio){
-           
-            if(posicion == 0){
-                
-                inicio = inicio.getSiguiente();
-            }
-           
-            else{
-                
-                Nodo aux = inicio;
-               
-                for (int i = 0; i < posicion-1; i++) {
-                    aux = aux.getSiguiente();
-                }
-               
-                Nodo siguiente = aux.getSiguiente();
-                
-                aux.setSiguiente(siguiente.getSiguiente());
-            }
-            
-            tamanio--;
-        }
-    }
-   
-    public void eliminar(){
-       
-        inicio = null;
-        
-        tamanio = 0;
-    }
-   
-    public void listar(){
-        
-        if (!esVacia()) {
-            
-            Nodo aux = inicio;
-            
-            int i = 0;
-           
-            while(aux != null){
-               
-                System.out.print(i + ".[ " + aux.getValor() + " ]" + " ->  ");
-                
-                aux = aux.getSiguiente();
-                
-                i++;
-            }
-        }
-    }
+	private Nodo head;
+	private int tam;
+	public void Lista(){
+		head = null;
+		tam = 0;
+	}
+	/////////////
+	public boolean esVacia(){
+		return head == null;
+	}
+	//////////tamaño
+	public int getTam(){
+		return tam;
+	}
+
+	public void agregarAlInicio(int dato){
+		Nodo nuevo = new Nodo();
+		nuevo.setDato(dato);
+		if (esVacia()) {
+			head = nuevo;
+		}
+		else{
+			nuevo.setSiguiente(head);
+			head = nuevo;
+		}		tam++;
+	}
+
+	public void insrtarPorReferencia(int referencia, int dato){
+		Nodo nuevo = new Nodo();
+		nuevo.setDato(dato);
+		if (!esVacia()) {
+			if (buscar(referencia)) {
+				Nodo aux = head;
+				while (aux.getDato() != referencia) {
+					aux = aux.getSiguiente();
+				}
+				Nodo siguiente = aux.getSiguiente();
+				aux.setSiguiente(nuevo);
+				nuevo.setSiguiente(siguiente);
+				tam++;
+			}
+		}
+	}
+
+	public void insrtarPorPosicion(int posicion, int dato){
+
+		if(posicion>=0 && posicion<=tam){
+			Nodo nuevo = new Nodo();
+			nuevo.setDato(dato);
+			if(posicion == 0){
+				nuevo.setSiguiente(head);
+				head = nuevo;
+			}
+			else{
+
+				if(posicion == tam){
+					Nodo aux = head;
+					while(aux.getSiguiente() != null){
+						aux = aux.getSiguiente();
+					}
+
+					aux.setSiguiente(nuevo);              
+				}
+				else{
+
+					Nodo aux = head;
+					for (int i = 0; i < (posicion-1); i++) {
+						aux = aux.getSiguiente();
+					}
+					Nodo siguiente = aux.getSiguiente();
+					aux.setSiguiente(nuevo);
+					nuevo.setSiguiente(siguiente);
+				}
+			}
+			tam++;
+		}
+	}
+
+	public void editarPorPosicion(int posicion , int dato){
+
+		if(posicion>=0 && posicion<tam){
+			if(posicion == 0){
+				head.setDato(dato);
+			}
+			else{
+				Nodo aux = head;
+				for (int i = 0; i < posicion; i++) {
+					aux = aux.getSiguiente();
+				}
+				aux.setDato(dato);
+			}
+		}
+	}
+
+
+	public void agregarAlFinal(int dato){
+		Nodo nuevo = new Nodo();
+		nuevo.setDato(dato);
+		if (esVacia()) {
+			head = nuevo;
+		} 
+		else{
+			Nodo aux = head;
+			while(aux.getSiguiente() != null){
+				aux = aux.getSiguiente();
+			}	aux.setSiguiente(nuevo);
+		}
+		tam++;
+	}
+	
+
+	public boolean buscar(int referencia){
+		Nodo aux = head;
+		boolean encontrado = false;
+		while(aux != null && encontrado != true){
+			if (referencia == aux.getDato()){
+				encontrado = true;
+			}
+			else{
+
+				aux = aux.getSiguiente();
+			}
+		}
+		return encontrado;
+	}
+
+	public int getPosicion(int referencia) throws Exception{
+		if (buscar(referencia)) {
+			Nodo aux = head;
+			int cont = 0;
+			while(referencia != aux.getDato()){
+				cont ++;
+				aux = aux.getSiguiente();
+			}
+			return cont;
+		}
+		else {
+			throw new Exception("valos no encontrado en la lista");
+		}
+	}
+
+	public int getDato(int posicion) throws Exception{
+		if(posicion>=0 && posicion<tam){
+			if (posicion == 0) {
+				return head.getDato();
+			}else{
+				Nodo aux = head;
+				for (int i = 0; i < posicion; i++) {
+					aux = aux.getSiguiente();
+				}
+				return aux.getDato();
+			}
+		}else {
+			throw new Exception("Posicion encontrada en la lista ");
+		}
+	}
+
+	
+	public void editarPorReferencia(int referencia, int dato){
+
+		if (buscar(referencia)) {
+			Nodo aux = head;
+			while(aux.getDato() != referencia){
+				aux = aux.getSiguiente();
+			}
+			aux.setDato(dato);
+		}
+	}
+
+	public void removerPorReferencia(int referencia){
+
+		if (buscar(referencia)) {
+			if (head.getDato() == referencia) {
+				head = head.getSiguiente();
+			} 
+			else{
+				Nodo aux = head;
+				while(aux.getSiguiente().getDato() != referencia){
+					aux = aux.getSiguiente();
+				}
+				Nodo siguiente = aux.getSiguiente().getSiguiente();
+				aux.setSiguiente(siguiente);  
+			}
+			tam--;
+		}
+	}
+
+	public void removerPorPos(int posicion){
+
+		if(posicion>=0 && posicion<tam){
+			if(posicion == 0){
+				head = head.getSiguiente();
+			}
+
+			else{
+				Nodo aux = head;
+				for (int i = 0; i < posicion-1; i++) {
+					aux = aux.getSiguiente();
+				}
+
+				Nodo siguiente = aux.getSiguiente();
+				aux.setSiguiente(siguiente.getSiguiente());
+			}
+
+			tam--;
+		}
+	}
+
+	public void eliminar(){
+		head = null;
+		tam = 0;
+	}
+
+	public void listar(){
+
+		if (!esVacia()) {
+			Nodo aux = head;
+			int i = 0;
+			while(aux != null){
+				System.out.print(i+".\t"+ aux.getDato() + "\n");
+				aux = aux.getSiguiente();
+				i++;
+			}
+		}
+	}
 }
