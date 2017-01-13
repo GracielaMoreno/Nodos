@@ -2,32 +2,27 @@ package listasEnlazadas;
 
 public class Nodo {
 
-    private int valor;
+	private int dato;
+	private Nodo siguiente;
+	public void Nodo(){
+		this.dato = 0;
+		this.siguiente = null;
+	}
 
-    private Nodo siguiente;
-    /**
-     * Constructor que inicializamos el valor de las variables.
-     */
-    public void Nodo(){
-        this.valor = 0;
-        this.siguiente = null;
-    }
-    
-   
-    
-    public int getValor() {
-        return valor;
-    }
+	///////getters y setterss 
+	public int getDato() {
+		return dato;
+	}
 
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
+	public void setDato(int dato) {
+		this.dato = dato;
+	}
 
-    public Nodo getSiguiente() {
-        return siguiente;
-    }
+	public Nodo getSiguiente() {
+		return siguiente;
+	}
 
-    public void setSiguiente(Nodo siguiente) {
-        this.siguiente = siguiente;
-    }   
+	public void setSiguiente(Nodo siguiente) {
+		this.siguiente = siguiente;
+	}   
 }
