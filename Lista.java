@@ -128,7 +128,7 @@ public class Lista {
 		return encontrado;
 	}
 
-	public int getPosicion(int referencia) throws Exception{
+	public int getPosicion(int referencia) {
 		if (buscar(referencia)) {
 			Nodo aux = head;
 			int cont = 0;
@@ -139,11 +139,11 @@ public class Lista {
 			return cont;
 		}
 		else {
-			throw new Exception("valos no encontrado en la lista");
+			return referencia;
 		}
 	}
 
-	public int getDato(int posicion) throws Exception{
+	public int getDato(int posicion){
 		if(posicion>=0 && posicion<tam){
 			if (posicion == 0) {
 				return head.getDato();
@@ -155,22 +155,9 @@ public class Lista {
 				return aux.getDato();
 			}
 		}else {
-			throw new Exception("Posicion encontrada en la lista ");
+			return posicion;
 		}
 	}
-
-	
-	public void editarPorReferencia(int referencia, int dato){
-
-		if (buscar(referencia)) {
-			Nodo aux = head;
-			while(aux.getDato() != referencia){
-				aux = aux.getSiguiente();
-			}
-			aux.setDato(dato);
-		}
-	}
-
 	public void removerPorReferencia(int referencia){
 
 		if (buscar(referencia)) {
@@ -189,26 +176,6 @@ public class Lista {
 		}
 	}
 
-	public void removerPorPos(int posicion){
-
-		if(posicion>=0 && posicion<tam){
-			if(posicion == 0){
-				head = head.getSiguiente();
-			}
-
-			else{
-				Nodo aux = head;
-				for (int i = 0; i < posicion-1; i++) {
-					aux = aux.getSiguiente();
-				}
-
-				Nodo siguiente = aux.getSiguiente();
-				aux.setSiguiente(siguiente.getSiguiente());
-			}
-
-			tam--;
-		}
-	}
 
 	public void eliminar(){
 		head = null;
