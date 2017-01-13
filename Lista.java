@@ -8,7 +8,7 @@ public class Lista {
 		head = null;
 		tam = 0;
 	}
-	/////////////
+	/////////////VACIA
 	public boolean esVacia(){
 		return head == null;
 	}
@@ -16,7 +16,7 @@ public class Lista {
 	public int getTam(){
 		return tam;
 	}
-
+///AGREGA AL INICIO
 	public void agregarAlInicio(int dato){
 		Nodo nuevo = new Nodo();
 		nuevo.setDato(dato);
@@ -80,22 +80,7 @@ public class Lista {
 		}
 	}
 
-	public void editarPorPosicion(int posicion , int dato){
-
-		if(posicion>=0 && posicion<tam){
-			if(posicion == 0){
-				head.setDato(dato);
-			}
-			else{
-				Nodo aux = head;
-				for (int i = 0; i < posicion; i++) {
-					aux = aux.getSiguiente();
-				}
-				aux.setDato(dato);
-			}
-		}
-	}
-
+	
 
 	public void agregarAlFinal(int dato){
 		Nodo nuevo = new Nodo();
@@ -156,23 +141,6 @@ public class Lista {
 			}
 		}else {
 			return posicion;
-		}
-	}
-	public void removerPorReferencia(int referencia){
-
-		if (buscar(referencia)) {
-			if (head.getDato() == referencia) {
-				head = head.getSiguiente();
-			} 
-			else{
-				Nodo aux = head;
-				while(aux.getSiguiente().getDato() != referencia){
-					aux = aux.getSiguiente();
-				}
-				Nodo siguiente = aux.getSiguiente().getSiguiente();
-				aux.setSiguiente(siguiente);  
-			}
-			tam--;
 		}
 	}
 
